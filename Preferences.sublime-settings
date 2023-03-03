@@ -1,0 +1,34 @@
+{
+	"file_exclude_patterns":
+	[
+		//"package-lock.json",
+		//"yarn.lock"
+		//".keep"
+	],
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		".npm/*",
+		//"_tests"
+		//"node_modules",
+	],
+  "ui_scale": 1.5,
+  "dpi_scale":1.5,
+  "font_face": "DejaVu Sans Mono",
+	"font_size": 8,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"remember_open_files": false,
+	"hot_exit": false,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true,
+	"detect_indentation": true,
+	"update_check": false,
+	"word_wrap": false,
+	"theme": "Default.sublime-theme",
+	"trim_trailing_white_space_on_save": true,
+}
