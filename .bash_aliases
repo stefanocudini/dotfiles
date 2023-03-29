@@ -31,3 +31,7 @@ alias kube_router_logs='kubectl -n fleet-mng logs -f router-0'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias kubestat='kubectl get pods --all-namespaces -w'
+
+function trim() {
+  sed -e 's/^[[:space:]]*//'
+}
