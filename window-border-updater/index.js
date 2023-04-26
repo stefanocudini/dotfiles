@@ -18,6 +18,11 @@ const W = process.argv[3] || 10;
 var out = cp.execSync('gsettings get org.gnome.desktop.interface gtk-theme'),
 	themeName = out.toString().trim().replace(/'/g,'');
 
+if (!FIN) {
+	console.log(`current theme: ${out}`);
+	console.log(`sudo node index.js /usr/share/themes/Ambiant-MATE/metacity-1/metacity-theme-1.xml 10`)
+	process.exit(1);
+}
 
 if(!fs.existsSync(FIN)) {
 	fs.copyFile(FIN, FIN+'.save', (err) => {
