@@ -1,6 +1,6 @@
 #!/bin/sh
 
 apt update && apt install \
-  gimp \
+  gimp flameshot peek \
   ncat nmap \ 
   saga spatialite-bin spatialite-gui 
