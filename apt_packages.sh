@@ -1,7 +1,7 @@
 #!/bin/sh
 
 apt update && apt install \
-  apt-transport-https ca-certificates \
+  apt-file apt-transport-https ca-certificates \
   curl aria2 pv nano \
   git meld colordiff \
   python3-pip python3-ipython \
