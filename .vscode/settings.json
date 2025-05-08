@@ -1,0 +1,34 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true
+  },
+  "editor.codeActionsOnSave": {   
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.markdownlint": "explicit"
+    },
+  "editor.wordWrap": "on",
+  "eslint.enable": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#2b4874",
+    "activityBar.background": "#2b4874",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#17090e",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#2b4874",
+    "statusBar.background": "#1d314f",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#2b4874",
+    "statusBarItem.remoteBackground": "#1d314f",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#1d314f",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#1d314f99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#1d314f"
+}
