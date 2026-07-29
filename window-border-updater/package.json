@@ -1,14 +1,17 @@
 {
   "name": "window-border-updater",
   "version": "1.0.0",
-  "description": "",
+  "description": "Update window border width for Ubuntu 24 desktop environments",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "wbu": "./bin/wbu"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.3"
-  }
+  "scripts": {
+    "start": "node bin/wbu"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "Stefano Cudini <stefano.cudini@gmail.com>",
+  "license": "ISC"
 }
