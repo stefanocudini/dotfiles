@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+/*
+	Copyright (c) 2026, Stefano Cudini - opengeo.tech
+	usage:
+
+	# wbu --width 10
+	# wbu --status
+*/
+const cp = require('child_process');
+const fs = require('fs');
+
+const { getDE, getWmTheme, findThemeFile, readBorderValues, applyBorderValues, restartWM } = require('../lib');
+
+// --- CLI ---
+
+function parseArgs(args) {
+	const opts = { width: null, status: false, help: false };
+	for (let i = 0; i < args.length; i++) {
+		const a = args[i];
+		if (a === '--help'   || a === '-h') opts.help   = true;
+		else if (a === '--status' || a === '-s') opts.status = true;
+		else if ((a === '--width' || a === '-w') && args[i + 1]) opts.width = Number(args[++i]);
+		else if (/^\d+$/.test(a)) opts.width = Number(a);
+	}
+	return opts;
+}
+
+function printHelp() {
+	console.log(`
+window-border-updater - Copyright (c) 2026, Stefano Cudini - opengeo.tech
+
+Usage: wbu [options]
+
+Options:
+  -w, --width <px>   Border width in pixels (default: 10)
+  -s, --status       Show current border values and theme file path
+  -h, --help         Show this help message
+
+Examples:
+  wbu -w 5
+  wbu 5
+  wbu --status
+`);
+}
+
+const args = process.argv.slice(2);
+const opts = parseArgs(args);
+
+if (opts.help || args.length === 0) {
+	printHelp();
+	process.exit(0);
+}
+
+const W = opts.width ?? 10;
+
+// --- root check ---
+
+if (process.getuid && process.getuid() !== 0) {
+	console.log('Permessi di root richiesti. Riesecuzione con sudo...');
+	const child = cp.spawnSync('sudo', ['-E', process.execPath, __filename, ...args], { stdio: 'inherit' });
+	process.exit(child.status ?? 1);
+}
+
+// --- main ---
+
+const de = getDE();
+console.log(`DE:         ${de || '(unknown)'}`);
+
+const themeName = getWmTheme(de);
+if (!themeName) {
+	console.error('ERROR: impossibile rilevare il tema del window manager');
+	process.exit(1);
+}
+console.log(`WM theme:   ${themeName}`);
+
+const FIN = findThemeFile(themeName);
+if (!FIN) {
+	console.error(`ERROR: file tema non trovato per "${themeName}"`);
+	process.exit(1);
+}
+
+const xml = fs.readFileSync(FIN, 'utf8');
+
+// --status
+if (opts.status) {
+	const values = readBorderValues(xml);
+	console.log(`Theme file: ${FIN}`);
+	console.log('Border values:');
+	for (const [name, val] of Object.entries(values))
+		console.log(`  ${name}: ${val}px`);
+	process.exit(0);
+}
+
+// apply
+const current = readBorderValues(xml);
+console.log(`\nBorder width: ${W}px`);
+for (const [name, val] of Object.entries(current))
+	console.log(`  ${name}: ${val} → ${W}`);
+
+fs.writeFileSync(FIN, applyBorderValues(xml, W));
+console.log('\nModifiche applicate. Riavvio WM...');
+restartWM(de);
+process.exit(0);

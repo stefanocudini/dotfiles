@@ -1,21 +1,23 @@
 [user]
     name = stefanocudini
     email = stefano.cudini@gmail.com
+	signingkey = FDD8F5AE5D216F9D
 
 [credential]
-    helper = cache --timeout=360000
+	helper = cache --timeout=36000
 
 [push]
-	default = matching
+	default = simple
+
+[commit]
+	verbose = true
+	all = true
 
 [alias]
-	commitnover = commit --no-verify
-	graph = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-	graph2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-
-[difftool]
-    prompt = false
-
-[diff]
-    tool = meld
-    guitool = meld
+	graph = log --graph --pretty=oneline --abbrev-commit
+[safe]
+	directory = /home/st3b1t/bip39-hex-dice
+[core]
+	editor = nano
+[sequence]
+	editor = subl --wait
